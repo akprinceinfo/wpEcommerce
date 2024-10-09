@@ -2900,6 +2900,102 @@ ol {
 	letter-spacing: 2px;
 }
 
+
+
+/* =========== 
+	Exta Css Code 
+============== */
+
+/* add to card button  */
+.button.product_type_simple.add_to_cart_button.ajax_add_to_cart {
+	border-radius: 50%;
+	padding-left: 12px;
+	background-color: #fffafa;
+	color: #000000;
+}
+.button.product_type_simple.add_to_cart_button.ajax_add_to_cart:hover {
+	background: #7FAD39;
+	color: black;
+}
+
+.added_to_cart.wc-forward {
+	width: 106px;
+	position: absolute;
+	top: -160px;
+	border-radius: 6px;
+	line-height: 20px;
+	right: 8px;
+	color: #fff;
+	background: #7FAD39;
+	border: none;
+	font-weight: 600;
+}
+.added_to_cart.wc-forward:hover {
+	background: #DD2222;
+}
+.button.product_type_simple.add_to_cart_button.ajax_add_to_cart.added::after {
+	display: none;
+}
+
+
+.compare.button.added {
+	top: 0;
+	position: absolute;
+	top: -182px;
+	left: 7%;
+	width: 200px;
+	background: #7FAD39 !important;
+	height: 40px;
+	color: #fff !important;
+}
+.woocommerce ul.products li.product .button {
+	display: inline-block;
+	margin-top: 1em;
+	padding-left: 12px;
+}
+
+.woocommerce ul.products li.product .button{
+	border-radius: 50%;
+}
+.woocommerce ul.products li.product .button:hover {
+	background: #7FAD39 !important;
+}
+
+.yith-wcwl-add-button span {
+	display: none;
+}
+
+.yith-wcwl-add-button a i {
+	margin-right: 0;
+}
+
+/* Sale Off Css add */
+
+.woocommerce-loop-product__title {
+	font-size: 20px;
+	font-weight: 600;
+}
+
+.list li{
+	list-style: none;
+}
+
+.product__item__text span a:hover{
+	color: #7FAD39;
+}
+
+
+.product__discount__title {
+	margin-bottom: 0px;
+}
+.section-title {
+	margin-bottom: 0px;
+}
+.product {
+	padding-top: 50px;
+	padding-bottom: 40px;
+}
+
 /*--------------------------------- Responsive Media Quaries -----------------------------*/
 
 @media only screen and (min-width: 1200px) {

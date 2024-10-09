@@ -30,14 +30,19 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 	<div class="product__discount__item__pic set-bg" data-setbg="<?php echo get_template_directory_uri();?>/img/product/discount/pd-2.jpg" style="background-image: url(&quot;img/product/discount/pd-2.jpg&quot;);">
 		<?php woocommerce_show_product_loop_sale_flash();?>
             <ul class="product__item__pic__hover">
-                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                <li><a href="#"><i class="fa fa-shopping-cart"></i><?php woocommerce_template_loop_add_to_cart();?></a></li>
+                <li><?php echo do_shortcode('[yith_wcwl_add_to_wishlist]');?></li>
+                <!-- <li><a href="#"><i class="fa fa-retweet"></i></a></li> -->
+                <li><a href="<?php echo site_url();?>" class="compare button" data-product_id="<?php echo get_the_id();?>" rel="nofollow"><i class="fa fa-retweet"></i></a></li>
+                <li><a href="<?php echo site_url();?>" aria-describedby="woocommerce_loop_add_to_cart_link_describedby_87" data-quantity="1" class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_id="<?php echo get_the_ID();?>" data-product_sku="woo-album" aria-label="Add to cart: “Album”" rel="nofollow" data-success_message="“Album” has been added to your cart"><i class="fa fa-shopping-cart"></i></a></li>
             </ul>
         </div>
         <div class="product__item__text">
-            <h6><a href="<?php the_permalink();?>"><?php woocommerce_template_loop_product_title() ?></a></h6>
-            <h5><?php woocommerce_template_loop_price(); ?></h5>
+			<span><?php $categ = $product->get_categories();
+					echo $categ; 
+				  ?>
+			</span>
+            <a href="<?php the_permalink();?>"><?php woocommerce_template_loop_product_title() ?></a>
+            <?php woocommerce_template_loop_price(); ?>
         </div>
     </div>
 	<?php
