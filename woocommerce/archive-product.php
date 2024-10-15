@@ -63,7 +63,7 @@ get_header( 'shop' );
                                 <?php 
 									$args = array(
 										'post_type' => 'product',
-										'posts_par_page' =>'1',
+										'posts_par_page' =>'0',
 										'mata_query'	=> array(
 											array(
 												'key'	=> '_sale_price',

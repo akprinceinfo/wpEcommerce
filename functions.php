@@ -111,10 +111,99 @@ function display_percentage_on_sale_badge( $html, $post, $product ) {
  * Change number or products per row to 3
  */
 
- if (!function_exists('loop_columns')) {
-	function loop_columns() {
-		return 3; // 3 products per row
+if (!function_exists('loop_columns')) {
+    function loop_columns() {
+        return 3; // 3 products per row
 	}
 }
 add_filter('loop_shop_columns', 'loop_columns', 999);
 
+
+
+
+/**
+ *  Product add to button and plus - minus
+ */
+
+ add_action( 'woocommerce_after_add_to_cart_quantity', 'ts_quantity_plus_sign' );
+ 
+ function ts_quantity_plus_sign() {
+    echo '<button type="button" class="plus" >+</button>';
+ }
+  
+ add_action( 'woocommerce_before_add_to_cart_quantity', 'ts_quantity_minus_sign' );
+ 
+ function ts_quantity_minus_sign() {
+    echo '<button type="button" class="minus" >-</button>';
+ }
+  
+ add_action( 'wp_footer', 'ts_quantity_plus_minus' );
+  
+ function ts_quantity_plus_minus() {
+    // To run this on the single product page
+    if ( ! is_product() ) return;
+    ?>
+    <script type="text/javascript">
+           
+       jQuery(document).ready(function($){   
+           
+             $('form.cart').on( 'click', 'button.plus, button.minus', function() {
+  
+             // Get current quantity values
+             var qty = $( this ).closest( 'form.cart' ).find( '.qty' );
+             var val   = parseFloat(qty.val());
+             var max = parseFloat(qty.attr( 'max' ));
+             var min = parseFloat(qty.attr( 'min' ));
+             var step = parseFloat(qty.attr( 'step' ));
+  
+             // Change the value if plus or minus
+             if ( $( this ).is( '.plus' ) ) {
+                if ( max && ( max <= val ) ) {
+                   qty.val( max );
+                } 
+             else {
+                qty.val( val + step );
+                  }
+             } 
+             else {
+                if ( min && ( min >= val ) ) {
+                   qty.val( min );
+                } 
+                else if ( val > 1 ) {
+                   qty.val( val - step );
+                }
+             }
+              
+          });
+           
+       });
+           
+    </script>
+    <?php
+ }
+
+
+
+ /**
+ * @snippet       Get Related Products by Same Title @ WooCommerce Single
+ * @how-to        Get CustomizeWoo.com FREE
+ * @author        Rodolfo Melogli
+ * @compatible    WooCommerce 3.8
+ * @community     https://businessbloomer.com/club/
+ */
+ 
+add_filter( 'woocommerce_related_products', 'bbloomer_related_products_by_same_title', 9999, 3 ); 
+ 
+function bbloomer_related_products_by_same_title( $related_posts, $product_id, $args ) {
+   $product = wc_get_product( $product_id );
+   $title = $product->get_name();
+   $related_posts = get_posts( array(
+      'post_type' => 'product',
+      'post_status' => 'publish',
+      'title' => $title,
+      'fields' => 'ids',
+      'posts_per_page' => -1,
+      'exclude' => array( $product_id ),
+   ));
+   return $related_posts;
+}
