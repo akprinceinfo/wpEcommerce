@@ -9,6 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
    <?php wp_head();?>
+   <?php global $woocommerce;?>
 </head>
 
 <body <?php body_class(); ?>>
@@ -123,20 +124,6 @@
                 </div>
                 <div class="col-lg-6">
                     <nav class="header__menu">
-                        <!-- <ul>
-                            <li><a href="./index.html">Home</a></li>
-                            <li><a href="./shop-grid.html">Shop</a></li>
-                            <li><a href="#">Pages</a>
-                                <ul class="header__menu__dropdown">
-                                    <li><a href="./shop-details.html">Shop Details</a></li>
-                                    <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                                    <li><a href="./checkout.html">Check Out</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
-                                </ul>
-                            </li>
-                            <li class="active"><a href="./blog.html">Blog</a></li>
-                            <li><a href="./contact.html">Contact</a></li>
-                        </ul> -->
                         <!-- menu add  -->
                         <?php 
                             wp_nav_menu(array(
@@ -149,10 +136,33 @@
                 <div class="col-lg-3">
                     <div class="header__cart">
                         <ul>
-                            <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                            <li><a href="<?php echo get_page_link(129) ;?>"><i class="fa fa-heart"></i> <span>
+                                <?php 
+                                    $count = 0;
+                                    if (function_exists('yith_wcwl_count_products')) {
+                                        echo $count = yith_wcwl_count_products();
+                                    }else{
+                                        echo "0";
+                                    }
+                                ?>
+                            </span></a></li>
+                            <li><a href="<?php echo wc_get_cart_url();?>"><i class="fa fa-shopping-bag"></i> <span><?php $total = $woocommerce->cart->get_cart_contents_count();
+                                if ($total) {
+                                    echo $total;
+                                }else{
+                                    echo "0";
+                                }
+                            ?></span></a></li>
                         </ul>
-                        <div class="header__cart__price">item: <span>$150.00</span></div>
+                        <div class="header__cart__price">item: <span>
+                        <?php $total_amount = $woocommerce->cart->get_cart_total();
+                                if ($total_amount) {
+                                    echo $total_amount;
+                                }else{
+                                    echo "0";
+                                }
+                        ?>
+                        </span></div>
                     </div>
                 </div>
             </div>
