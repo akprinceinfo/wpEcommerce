@@ -3375,6 +3375,11 @@ a.button.wc-backward {
 }
 
 
+.header__top__right__auth a {
+	float: left !important;
+}
+
+
 /*--------------------------------- Responsive Media Quaries -----------------------------*/
 
 @media only screen and (min-width: 1200px) {
